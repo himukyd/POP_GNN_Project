@@ -1,0 +1,16 @@
+cat > .gitignore << 'EOF'
+# Large generated output files
+CoarsedGraphOutput/
+MergeParts/
+*_input/
+*.dgl
+output/
+
+# Compiled CUDA binaries
+him_coarsening
+him_coarsening
+
+# Python cache
+__pycache__/
+*.pyc
+EOF
