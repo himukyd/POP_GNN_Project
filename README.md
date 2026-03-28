@@ -10,9 +10,9 @@ Training GNNs on large graphs (millions of nodes/edges) is computationally expen
 
 The pipeline consists of two stages:
 
-1. **`roy_coarsening.cu`** — A CUDA kernel that performs iterative heavy-edge matching to coarsen the graph on the GPU.
-2. **`preprocess.py`** — A Python script that loads graph datasets (OGB, Reddit, Yelp, IGB, etc.), generates CSR input files, runs the CUDA coarsening binary, and aggregates node features, labels, and masks onto the coarsened graph.
-3. **`train.py`** — Trains a GraphSAGE model on the coarsened graph and evaluates it on the original graph by mapping predictions back via the vertex mapping file.
+1. **`him_coarsening.cu`** — A CUDA kernel that performs iterative heavy-edge matching to coarsen the graph on the GPU.
+3. **`preprocess.py`** — A Python script that loads graph datasets (OGB, Reddit, Yelp, IGB, etc.), generates CSR input files, runs the CUDA coarsening binary, and aggregates node features, labels, and masks onto the coarsened graph.
+4. **`train.py`** — Trains a GraphSAGE model on the coarsened graph and evaluates it on the original graph by mapping predictions back via the vertex mapping file.
 
 ---
 
