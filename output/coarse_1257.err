@@ -1,40 +1,0 @@
-Inference Layer 1:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 1:   4%|▎         | 2/57 [00:00<00:02, 19.79it/s]Inference Layer 1:  33%|███▎      | 19/57 [00:00<00:00, 104.42it/s]Inference Layer 1:  56%|█████▌    | 32/57 [00:00<00:00, 114.60it/s]Inference Layer 1:  77%|███████▋  | 44/57 [00:00<00:00, 109.48it/s]Inference Layer 1:  96%|█████████▋| 55/57 [00:00<00:00, 101.67it/s]Inference Layer 1: 100%|██████████| 57/57 [00:00<00:00, 97.03it/s] 
-Inference Layer 2:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 2:  14%|█▍        | 8/57 [00:00<00:00, 69.35it/s]Inference Layer 2:  26%|██▋       | 15/57 [00:00<00:00, 46.60it/s]Inference Layer 2:  37%|███▋      | 21/57 [00:00<00:00, 39.22it/s]Inference Layer 2:  46%|████▌     | 26/57 [00:00<00:00, 34.11it/s]Inference Layer 2:  53%|█████▎    | 30/57 [00:00<00:00, 31.50it/s]Inference Layer 2:  60%|█████▉    | 34/57 [00:00<00:00, 29.04it/s]Inference Layer 2:  65%|██████▍   | 37/57 [00:01<00:00, 27.16it/s]Inference Layer 2:  70%|███████   | 40/57 [00:01<00:00, 24.94it/s]Inference Layer 2:  75%|███████▌  | 43/57 [00:01<00:00, 23.40it/s]Inference Layer 2:  81%|████████  | 46/57 [00:01<00:00, 22.25it/s]Inference Layer 2:  86%|████████▌ | 49/57 [00:01<00:00, 21.12it/s]Inference Layer 2:  91%|█████████ | 52/57 [00:01<00:00, 20.24it/s]Inference Layer 2:  96%|█████████▋| 55/57 [00:02<00:00, 19.77it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 19.06it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 26.03it/s]
-/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
-An experimental feature for CUDA allocations is turned on for better allocation
-pattern resulting in better memory usage for minibatch GNN training workloads.
-See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
-and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
-if you want to disable it and set it True to acknowledge and disable the warning.
-
-  gb_warning(WARNING_STR_TO_BE_SHOWN)
-/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
-An experimental feature for CUDA allocations is turned on for better allocation
-pattern resulting in better memory usage for minibatch GNN training workloads.
-See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
-and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
-if you want to disable it and set it True to acknowledge and disable the warning.
-
-  gb_warning(WARNING_STR_TO_BE_SHOWN)
-Inference Layer 1:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 1:  26%|██▋       | 15/57 [00:00<00:00, 145.08it/s]Inference Layer 1:  53%|█████▎    | 30/57 [00:00<00:00, 142.80it/s]Inference Layer 1:  79%|███████▉  | 45/57 [00:00<00:00, 123.48it/s]Inference Layer 1: 100%|██████████| 57/57 [00:00<00:00, 114.36it/s]
-Inference Layer 2:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 2:  16%|█▌        | 9/57 [00:00<00:00, 76.72it/s]Inference Layer 2:  30%|██▉       | 17/57 [00:00<00:00, 49.55it/s]Inference Layer 2:  40%|████      | 23/57 [00:00<00:00, 39.22it/s]Inference Layer 2:  49%|████▉     | 28/57 [00:00<00:00, 34.19it/s]Inference Layer 2:  56%|█████▌    | 32/57 [00:00<00:00, 31.16it/s]Inference Layer 2:  63%|██████▎   | 36/57 [00:01<00:00, 28.05it/s]Inference Layer 2:  68%|██████▊   | 39/57 [00:01<00:00, 26.17it/s]Inference Layer 2:  74%|███████▎  | 42/57 [00:01<00:00, 24.41it/s]Inference Layer 2:  79%|███████▉  | 45/57 [00:01<00:00, 23.17it/s]Inference Layer 2:  84%|████████▍ | 48/57 [00:01<00:00, 21.95it/s]Inference Layer 2:  89%|████████▉ | 51/57 [00:01<00:00, 20.83it/s]Inference Layer 2:  95%|█████████▍| 54/57 [00:01<00:00, 19.83it/s]Inference Layer 2:  98%|█████████▊| 56/57 [00:02<00:00, 18.94it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 26.28it/s]
-/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
-An experimental feature for CUDA allocations is turned on for better allocation
-pattern resulting in better memory usage for minibatch GNN training workloads.
-See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
-and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
-if you want to disable it and set it True to acknowledge and disable the warning.
-
-  gb_warning(WARNING_STR_TO_BE_SHOWN)
-Inference Layer 1:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 1:  25%|██▍       | 14/57 [00:00<00:00, 137.69it/s]Inference Layer 1:  51%|█████     | 29/57 [00:00<00:00, 140.24it/s]Inference Layer 1:  77%|███████▋  | 44/57 [00:00<00:00, 122.01it/s]Inference Layer 1: 100%|██████████| 57/57 [00:00<00:00, 103.41it/s]Inference Layer 1: 100%|██████████| 57/57 [00:00<00:00, 112.16it/s]
-Inference Layer 2:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 2:  16%|█▌        | 9/57 [00:00<00:00, 75.83it/s]Inference Layer 2:  30%|██▉       | 17/57 [00:00<00:00, 49.10it/s]Inference Layer 2:  40%|████      | 23/57 [00:00<00:00, 39.99it/s]Inference Layer 2:  49%|████▉     | 28/57 [00:00<00:00, 34.32it/s]Inference Layer 2:  56%|█████▌    | 32/57 [00:00<00:00, 31.32it/s]Inference Layer 2:  63%|██████▎   | 36/57 [00:01<00:00, 28.52it/s]Inference Layer 2:  68%|██████▊   | 39/57 [00:01<00:00, 26.48it/s]Inference Layer 2:  74%|███████▎  | 42/57 [00:01<00:00, 24.82it/s]Inference Layer 2:  79%|███████▉  | 45/57 [00:01<00:00, 23.66it/s]Inference Layer 2:  84%|████████▍ | 48/57 [00:01<00:00, 22.46it/s]Inference Layer 2:  89%|████████▉ | 51/57 [00:01<00:00, 21.36it/s]Inference Layer 2:  95%|█████████▍| 54/57 [00:01<00:00, 20.31it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 19.11it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 26.71it/s]
-/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
-An experimental feature for CUDA allocations is turned on for better allocation
-pattern resulting in better memory usage for minibatch GNN training workloads.
-See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
-and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
-if you want to disable it and set it True to acknowledge and disable the warning.
-
-  gb_warning(WARNING_STR_TO_BE_SHOWN)
-Inference Layer 1:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 1:  23%|██▎       | 13/57 [00:00<00:00, 128.96it/s]Inference Layer 1:  47%|████▋     | 27/57 [00:00<00:00, 133.40it/s]Inference Layer 1:  72%|███████▏  | 41/57 [00:00<00:00, 118.21it/s]Inference Layer 1:  95%|█████████▍| 54/57 [00:00<00:00, 107.78it/s]Inference Layer 1: 100%|██████████| 57/57 [00:00<00:00, 108.48it/s]
-Inference Layer 2:   0%|          | 0/57 [00:00<?, ?it/s]Inference Layer 2:  16%|█▌        | 9/57 [00:00<00:00, 75.85it/s]Inference Layer 2:  30%|██▉       | 17/57 [00:00<00:00, 49.08it/s]Inference Layer 2:  40%|████      | 23/57 [00:00<00:00, 39.55it/s]Inference Layer 2:  49%|████▉     | 28/57 [00:00<00:00, 34.32it/s]Inference Layer 2:  56%|█████▌    | 32/57 [00:00<00:00, 31.20it/s]Inference Layer 2:  63%|██████▎   | 36/57 [00:01<00:00, 28.43it/s]Inference Layer 2:  68%|██████▊   | 39/57 [00:01<00:00, 26.83it/s]Inference Layer 2:  74%|███████▎  | 42/57 [00:01<00:00, 25.25it/s]Inference Layer 2:  79%|███████▉  | 45/57 [00:01<00:00, 24.18it/s]Inference Layer 2:  84%|████████▍ | 48/57 [00:01<00:00, 23.01it/s]Inference Layer 2:  89%|████████▉ | 51/57 [00:01<00:00, 21.92it/s]Inference Layer 2:  95%|█████████▍| 54/57 [00:01<00:00, 20.92it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 19.68it/s]Inference Layer 2: 100%|██████████| 57/57 [00:02<00:00, 27.12it/s]
