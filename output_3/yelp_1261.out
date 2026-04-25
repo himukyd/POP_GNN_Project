@@ -1,0 +1,349 @@
+--- STARTING CLIQUE-BASED COARSENING: yelp ---
+Step 1: Training Baseline on Original Graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.3
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing yelp Graph Data ---
+--> [LOG] Loading dataset...
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([45954])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 45954 nodes, 7693958 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in yelp_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight yelp_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening yelp_input 45954 7693958 0.3
+Coarsening Output (stdout):
+
+Threshold: 0.3
+Coarsening Level 0 Number of Vertex = 45954
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                   2           4685
+         1                   4           4686
+         2                   0           4685
+         3                   5           4687
+         4                   1           4686
+         5                   3           4687
+         6                  40           4688
+         7                  -1           4689
+         8                  17           4690
+         9                6696           4691
+Level 0: Max coarse ID = 23140, Min coarse ID = 0, Expected max = 23140
+global_cmap sample (first 10): 4685 4686 4685 4687 4686 4687 4688 4689 4690 4691 
+After Coarsening Number of Vertex = 23141
+Coarsening Level 1 Number of Vertex = 23141
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0                6403           6946
+         1               17812           6947
+         2               18062           6948
+         3               13057           6949
+         4                9975           6950
+         5               10113           6951
+         6                2365           6952
+         7                5830           6953
+         8               10994           6954
+         9               17925           6955
+Level 1: Max coarse ID = 11703, Min coarse ID = 0, Expected max = 11703
+global_cmap sample (first 10): 3490 3491 3490 3492 3491 3492 3493 3494 3495 3496 
+After Coarsening Number of Vertex = 11704
+Number of coarsening passes: 2
+Size of final xadj: 11705, adjncy: 638024, weight: 638024
+Final: Max coarse ID = 11703, Min coarse ID = 0, Expected max = 11703
+Total mapped vertices: 45954, Expected: 45954
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 11704
+Final Number of Edges = 319012
+INPUT FILE READING TIME: 2.22901 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.002709 seconds
+COARSENING TIME (excluding I/O and transfers): 0.136795 seconds
+Total Pre-computation time: 2.36851 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=11704, num_edges=638024,
+      ndata_schemes={'feat': Scheme(shape=(32,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to yelp.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 4.0409 seconds
+Spectral Weighting Time: 3.8461 seconds
+Coarsening Execution Time: 1.7836 seconds
+Total Preprocessing Time: 9.6705 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 45954, Edges: 4025674
+Coarsened Graph Nodes: 11704, Edges: 319012
+Data Preparation Time: 4.0409s
+Weighting Execution Time (SPECTRAL): 3.8461s
+Coarsening Execution Time: 1.7836s
+Total Preprocessing Time (G to G''): 9.6705s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.5
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing yelp Graph Data ---
+--> [LOG] Loading dataset...
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([45954])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 45954 nodes, 7693958 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in yelp_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight yelp_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.7
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing yelp Graph Data ---
+--> [LOG] Loading dataset...
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([45954])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 45954 nodes, 7693958 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in yelp_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight yelp_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening yelp_input 45954 7693958 0.7
+Coarsening Output (stdout):
+
+Threshold: 0.7
+Coarsening Level 0 Number of Vertex = 45954
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                   2           3804
+         1                   4           3805
+         2                   0           3804
+         3                   5           3806
+         4                   1           3805
+         5                   3           3806
+         6                  40           3807
+         7                  -1           3808
+         8                6695           3809
+         9                  46           3810
+Level 0: Max coarse ID = 23152, Min coarse ID = 0, Expected max = 23152
+global_cmap sample (first 10): 3804 3805 3804 3806 3805 3806 3807 3808 3809 3810 
+After Coarsening Number of Vertex = 23153
+Number of coarsening passes: 1
+Size of final xadj: 23154, adjncy: 2070282, weight: 2070282
+Final: Max coarse ID = 23152, Min coarse ID = 0, Expected max = 23152
+Total mapped vertices: 45954, Expected: 45954
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 23153
+Final Number of Edges = 1035141
+INPUT FILE READING TIME: 2.26824 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.007846 seconds
+COARSENING TIME (excluding I/O and transfers): 0.104516 seconds
+Total Pre-computation time: 2.3806 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=23153, num_edges=2070282,
+      ndata_schemes={'feat': Scheme(shape=(32,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to yelp.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 3.9157 seconds
+Spectral Weighting Time: 3.9008 seconds
+Coarsening Execution Time: 2.3804 seconds
+Total Preprocessing Time: 10.1969 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 45954, Edges: 4025674
+Coarsened Graph Nodes: 23153, Edges: 1035141
+Data Preparation Time: 3.9157s
+Weighting Execution Time (SPECTRAL): 3.9008s
+Coarsening Execution Time: 2.3804s
+Total Preprocessing Time (G to G''): 10.1969s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.85
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing yelp Graph Data ---
+--> [LOG] Loading dataset...
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([45954])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 45954 nodes, 7693958 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in yelp_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight yelp_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening yelp_input 45954 7693958 0.85
+Coarsening Output (stdout):
+
+Threshold: 0.85
+Coarsening Level 0 Number of Vertex = 45954
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                   2           4607
+         1                   4           4608
+         2                   0           4607
+         3                   5           4609
+         4                   1           4608
+         5                   3           4609
+         6                  40           4610
+         7                  -1           4611
+         8                  17           4612
+         9                6696           4613
+Level 0: Max coarse ID = 23140, Min coarse ID = 0, Expected max = 23140
+global_cmap sample (first 10): 4607 4608 4607 4609 4608 4609 4610 4611 4612 4613 
+After Coarsening Number of Vertex = 23141
+Number of coarsening passes: 1
+Size of final xadj: 23142, adjncy: 2072250, weight: 2072250
+Final: Max coarse ID = 23140, Min coarse ID = 0, Expected max = 23140
+Total mapped vertices: 45954, Expected: 45954
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 23141
+Final Number of Edges = 1036125
+INPUT FILE READING TIME: 2.26149 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.007902 seconds
+COARSENING TIME (excluding I/O and transfers): 0.093651 seconds
+Total Pre-computation time: 2.36304 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=23141, num_edges=2072250,
+      ndata_schemes={'feat': Scheme(shape=(32,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to yelp.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 3.8591 seconds
+Spectral Weighting Time: 3.5048 seconds
+Coarsening Execution Time: 2.3763 seconds
+Total Preprocessing Time: 9.7402 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 45954, Edges: 4025674
+Coarsened Graph Nodes: 23141, Edges: 1036125
+Data Preparation Time: 3.8591s
+Weighting Execution Time (SPECTRAL): 3.5048s
+Coarsening Execution Time: 2.3763s
+Total Preprocessing Time (G to G''): 9.7402s
+--> Training SAGE on coarsened graph...
+--- yelp EXPERIMENTS COMPLETE ---

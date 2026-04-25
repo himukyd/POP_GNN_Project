@@ -1,0 +1,43 @@
+Inference Layer 1:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 12/12 [00:00<00:00, 259.31it/s]
+Inference Layer 2:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 2:  75%|███████▌  | 9/12 [00:00<00:00, 87.49it/s]Inference Layer 2: 100%|██████████| 12/12 [00:00<00:00, 93.40it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 12/12 [00:00<00:00, 260.00it/s]
+Inference Layer 2:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 2:  75%|███████▌  | 9/12 [00:00<00:00, 86.48it/s]Inference Layer 2: 100%|██████████| 12/12 [00:00<00:00, 92.45it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+--> [ERROR] Failed to process weights: could not convert string '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0 to float32 at row 0, column 1.
+Inference Layer 1:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 12/12 [00:00<00:00, 272.79it/s]
+Inference Layer 2:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 2:  75%|███████▌  | 9/12 [00:00<00:00, 85.38it/s]Inference Layer 2: 100%|██████████| 12/12 [00:00<00:00, 91.31it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 12/12 [00:00<00:00, 279.77it/s]
+Inference Layer 2:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 2:  83%|████████▎ | 10/12 [00:00<00:00, 92.87it/s]Inference Layer 2: 100%|██████████| 12/12 [00:00<00:00, 96.17it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 12/12 [00:00<00:00, 276.03it/s]
+Inference Layer 2:   0%|          | 0/12 [00:00<?, ?it/s]Inference Layer 2:  75%|███████▌  | 9/12 [00:00<00:00, 88.36it/s]Inference Layer 2: 100%|██████████| 12/12 [00:00<00:00, 93.94it/s]
