@@ -1,0 +1,42 @@
+Inference Layer 1:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 5/5 [00:00<00:00, 199.06it/s]
+Inference Layer 2:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 2: 100%|██████████| 5/5 [00:00<00:00, 241.18it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 5/5 [00:00<00:00, 203.95it/s]
+Inference Layer 2:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 2: 100%|██████████| 5/5 [00:00<00:00, 252.49it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 5/5 [00:00<00:00, 235.48it/s]
+Inference Layer 2:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 2: 100%|██████████| 5/5 [00:00<00:00, 249.94it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 5/5 [00:00<00:00, 253.71it/s]
+Inference Layer 2:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 2: 100%|██████████| 5/5 [00:00<00:00, 247.20it/s]
+/data/himanshu/env_him/lib/python3.11/site-packages/dgl/graphbolt/__init__.py:114: GBWarning: 
+An experimental feature for CUDA allocations is turned on for better allocation
+pattern resulting in better memory usage for minibatch GNN training workloads.
+See https://pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf,
+and set the environment variable `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False`
+if you want to disable it and set it True to acknowledge and disable the warning.
+
+  gb_warning(WARNING_STR_TO_BE_SHOWN)
+Inference Layer 1:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 1: 100%|██████████| 5/5 [00:00<00:00, 248.88it/s]
+Inference Layer 2:   0%|          | 0/5 [00:00<?, ?it/s]Inference Layer 2: 100%|██████████| 5/5 [00:00<00:00, 242.64it/s]

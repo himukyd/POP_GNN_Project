@@ -1,0 +1,808 @@
+--- STARTING CLIQUE-BASED COARSENING: pubmed ---
+Step 1: Training Baseline on Original Graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.3
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing pubmed Graph Data ---
+--> [LOG] Loading dataset...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([19717])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 19717 nodes, 88651 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in pubmed_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight pubmed_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening pubmed_input 19717 88651 0.3
+Coarsening Output (stdout):
+
+Threshold: 0.3
+Coarsening Level 0 Number of Vertex = 19717
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                7636           2134
+         1                8359           2135
+         2               11485           2136
+         3                8249           2137
+         4                  -1           2138
+         5               12968           2139
+         6                2216           2140
+         7                2343           2141
+         8                3157           2142
+         9                 221           2143
+Level 0: Max coarse ID = 16324, Min coarse ID = 0, Expected max = 16324
+global_cmap sample (first 10): 2134 2135 2136 2137 2138 2139 2140 2141 2142 2143 
+After Coarsening Number of Vertex = 16325
+Coarsening Level 1 Number of Vertex = 16325
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0               11279           2531
+         1                  -1           2532
+         2               14938           2533
+         3               12302           2534
+         4                4899           2535
+         5                7143           2536
+         6               12664           2537
+         7                3235           2538
+         8                  -1           2539
+         9                3246           2540
+Level 1: Max coarse ID = 13789, Min coarse ID = 0, Expected max = 13789
+global_cmap sample (first 10): 5850 5851 5852 5853 5854 5855 5856 8681 5857 5858 
+After Coarsening Number of Vertex = 13790
+Coarsening Level 2 Number of Vertex = 13790
+Merging info saved to ./MergeParts/merge_level_2.txt
+Merging details for first 10 vertices at level 2:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           5081
+         1                1160           5082
+         2                  -1           5083
+         3                9780           5084
+         4                  -1           5085
+         5                  -1           5086
+         6                  -1           5087
+         7                  -1           5088
+         8                  -1           5089
+         9                  -1           5090
+Level 2: Max coarse ID = 11915, Min coarse ID = 0, Expected max = 11915
+global_cmap sample (first 10): 6660 11661 10402 10403 10404 10405 10997 10565 10998 2633 
+After Coarsening Number of Vertex = 11916
+Coarsening Level 3 Number of Vertex = 11916
+Merging info saved to ./MergeParts/merge_level_3.txt
+Merging details for first 10 vertices at level 3:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           3638
+         1                  -1           3639
+         2                4624           3640
+         3                  -1           3641
+         4                  -1           3642
+         5                  -1           3643
+         6                  -1           3644
+         7                  -1           3645
+         8                  -1           3646
+         9                  -1           3647
+Level 3: Max coarse ID = 10550, Min coarse ID = 0, Expected max = 10550
+global_cmap sample (first 10): 4086 10168 6019 4 3094 6444 1221 9523 4024 4398 
+After Coarsening Number of Vertex = 10551
+Coarsening Level 4 Number of Vertex = 10551
+Merging info saved to ./MergeParts/merge_level_4.txt
+Merging details for first 10 vertices at level 4:
+ Vertex ID   Matched Vertex ID     New Label
+         0                4078           4861
+         1                4070           4862
+         2                  -1           4863
+         3                  -1           4864
+         4               10323           4865
+         5                  -1           4866
+         6                  -1           4867
+         7                4053           4868
+         8                  -1           4869
+         9                  -1           4870
+Level 4: Max coarse ID = 9544, Min coarse ID = 0, Expected max = 9544
+global_cmap sample (first 10): 6760 814 457 4865 1691 5600 6803 6111 7549 557 
+After Coarsening Number of Vertex = 9545
+Coarsening Level 5 Number of Vertex = 9545
+Merging info saved to ./MergeParts/merge_level_5.txt
+Merging details for first 10 vertices at level 5:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           5528
+         1                  -1           5529
+         2                  -1           5530
+         3                  -1           5531
+         4                  -1           5532
+         5                8591           5533
+         6                 851           5534
+         7                  -1           5535
+         8                  -1           5536
+         9                  -1           5537
+Level 5: Max coarse ID = 8778, Min coarse ID = 0, Expected max = 8778
+global_cmap sample (first 10): 3361 5127 6004 4413 4295 5642 3007 6343 7395 434 
+After Coarsening Number of Vertex = 8779
+Coarsening Level 6 Number of Vertex = 8779
+Merging info saved to ./MergeParts/merge_level_6.txt
+Merging details for first 10 vertices at level 6:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           5687
+         1                  -1           5688
+         2                  -1           5689
+         3                  -1           5690
+         4                8044           5691
+         5                  -1           5692
+         6                  -1           5693
+         7                  -1           5694
+         8                  -1           5695
+         9                  -1           5696
+Level 6: Max coarse ID = 8175, Min coarse ID = 0, Expected max = 8175
+global_cmap sample (first 10): 6934 1046 2297 1729 1591 7273 3020 141 7151 3827 
+After Coarsening Number of Vertex = 8176
+Coarsening Level 7 Number of Vertex = 8176
+Merging info saved to ./MergeParts/merge_level_7.txt
+Merging details for first 10 vertices at level 7:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4554
+         1                  -1           4555
+         2                  -1           4556
+         3                  -1           4557
+         4                  -1           4558
+         5                  -1           4559
+         6                  -1           4560
+         7                  -1           4561
+         8                  -1           4562
+         9                  -1           4563
+Level 7: Max coarse ID = 7712, Min coarse ID = 0, Expected max = 7712
+global_cmap sample (first 10): 4908 4667 7299 7214 6278 2560 2754 2665 1780 6652 
+After Coarsening Number of Vertex = 7713
+Coarsening Level 8 Number of Vertex = 7713
+Merging info saved to ./MergeParts/merge_level_8.txt
+Merging details for first 10 vertices at level 8:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4388
+         1                  -1           4389
+         2                  -1           4390
+         3                  -1           4391
+         4                5340           4392
+         5                  -1           4393
+         6                5810           4394
+         7                2754           4395
+         8                  -1           4396
+         9                  -1           4397
+Level 8: Max coarse ID = 7345, Min coarse ID = 0, Expected max = 7345
+global_cmap sample (first 10): 2787 7296 2312 7193 1391 398 4395 1893 6935 6866 
+After Coarsening Number of Vertex = 7346
+Coarsening Level 9 Number of Vertex = 7346
+Merging info saved to ./MergeParts/merge_level_9.txt
+Merging details for first 10 vertices at level 9:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4851
+         1                  -1           4852
+         2                  -1           4853
+         3                  -1           4854
+         4                  -1           4855
+         5                  -1           4856
+         6                  -1           4857
+         7                  -1           4858
+         8                  -1           4859
+         9                  -1           4860
+Level 9: Max coarse ID = 7045, Min coarse ID = 0, Expected max = 7045
+global_cmap sample (first 10): 1665 5657 6107 6036 6149 3259 6257 6107 645 3024 
+After Coarsening Number of Vertex = 7046
+Coarsening Level 10 Number of Vertex = 7046
+Merging info saved to ./MergeParts/merge_level_10.txt
+Merging details for first 10 vertices at level 10:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4642
+         1                  -1           4643
+         2                  -1           4644
+         3                  -1           4645
+         4                  -1           4646
+         5                  -1           4647
+         6                  -1           4648
+         7                  -1           4649
+         8                  -1           4650
+         9                  -1           4651
+Level 10: Max coarse ID = 6791, Min coarse ID = 0, Expected max = 6791
+global_cmap sample (first 10): 4522 173 5031 1455 1138 3055 6369 5031 1701 966 
+After Coarsening Number of Vertex = 6792
+Coarsening Level 11 Number of Vertex = 6792
+Merging info saved to ./MergeParts/merge_level_11.txt
+Merging details for first 10 vertices at level 11:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           5095
+         1                  -1           5096
+         2                  -1           5097
+         3                  -1           5098
+         4                  -1           5099
+         5                  -1           5100
+         6                  -1           5101
+         7                  -1           5102
+         8                  -1           5103
+         9                  -1           5104
+Level 11: Max coarse ID = 6579, Min coarse ID = 0, Expected max = 6579
+global_cmap sample (first 10): 565 2816 4729 4250 5392 4428 128 4729 4820 3177 
+After Coarsening Number of Vertex = 6580
+Coarsening Level 12 Number of Vertex = 6580
+Merging info saved to ./MergeParts/merge_level_12.txt
+Merging details for first 10 vertices at level 12:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4998
+         1                  -1           4999
+         2                  -1           5000
+         3                  -1           5001
+         4                  -1           5002
+         5                  -1           5003
+         6                  -1           5004
+         7                  -1           5005
+         8                  -1           5006
+         9                  -1           5007
+Level 12: Max coarse ID = 6392, Min coarse ID = 0, Expected max = 6392
+global_cmap sample (first 10): 1074 1614 1326 25 5423 4997 3435 1326 5737 4509 
+After Coarsening Number of Vertex = 6393
+Coarsening Level 13 Number of Vertex = 6393
+Merging info saved to ./MergeParts/merge_level_13.txt
+Merging details for first 10 vertices at level 13:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4613
+         1                4858           4614
+         2                  -1           4615
+         3                  -1           4616
+         4                  -1           4617
+         5                  -1           4618
+         6                  -1           4619
+         7                  -1           4620
+         8                  -1           4621
+         9                  -1           4622
+Level 13: Max coarse ID = 6232, Min coarse ID = 0, Expected max = 6232
+global_cmap sample (first 10): 3476 5607 4881 4638 5824 5753 5405 4881 148 373 
+After Coarsening Number of Vertex = 6233
+Coarsening Level 14 Number of Vertex = 6233
+Merging info saved to ./MergeParts/merge_level_14.txt
+Merging details for first 10 vertices at level 14:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4674
+         1                  -1           4675
+         2                  -1           4676
+         3                  -1           4677
+         4                  -1           4678
+         5                  -1           4679
+         6                  -1           4680
+         7                  -1           4681
+         8                  -1           4682
+         9                  -1           4683
+Level 14: Max coarse ID = 6093, Min coarse ID = 0, Expected max = 6093
+global_cmap sample (first 10): 2362 1757 1447 265 5841 2514 5464 1447 2738 6021 
+After Coarsening Number of Vertex = 6094
+Coarsening Level 15 Number of Vertex = 6094
+Merging info saved to ./MergeParts/merge_level_15.txt
+Merging details for first 10 vertices at level 15:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4550
+         1                  -1           4551
+         2                  -1           4552
+         3                  -1           4553
+         4                  -1           4554
+         5                  -1           4555
+         6                  -1           4556
+         7                  -1           4557
+         8                  -1           4558
+         9                  -1           4559
+Level 15: Max coarse ID = 5974, Min coarse ID = 0, Expected max = 5974
+global_cmap sample (first 10): 718 2087 4747 4655 5879 718 4193 4747 5318 4956 
+After Coarsening Number of Vertex = 5975
+Coarsening Level 16 Number of Vertex = 5975
+Merging info saved to ./MergeParts/merge_level_16.txt
+Merging details for first 10 vertices at level 16:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4193
+         1                  -1           4194
+         2                  -1           4195
+         3                  -1           4196
+         4                  -1           4197
+         5                  -1           4198
+         6                  -1           4199
+         7                  -1           4200
+         8                  -1           4201
+         9                  -1           4202
+Level 16: Max coarse ID = 5704, Min coarse ID = 0, Expected max = 5704
+global_cmap sample (first 10): 1287 4045 228 1449 5634 1287 1287 228 2046 2754 
+After Coarsening Number of Vertex = 5705
+Number of coarsening passes: 17
+Size of final xadj: 5706, adjncy: 15587, weight: 15587
+Final: Max coarse ID = 5704, Min coarse ID = 0, Expected max = 5704
+Total mapped vertices: 19717, Expected: 19717
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 5705
+Final Number of Edges = 7793
+INPUT FILE READING TIME: 0.045843 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.001675 seconds
+COARSENING TIME (excluding I/O and transfers): 2.14798 seconds
+Total Pre-computation time: 2.1955 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=5705, num_edges=15587,
+      ndata_schemes={'feat': Scheme(shape=(500,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to pubmed.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.7206 seconds
+Spectral Weighting Time: 0.9426 seconds
+Coarsening Execution Time: 3.2473 seconds
+Total Preprocessing Time: 4.9106 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 19717, Edges: 44325
+Coarsened Graph Nodes: 5705, Edges: 7793
+Data Preparation Time: 0.7206s
+Weighting Execution Time (SPECTRAL): 0.9426s
+Coarsening Execution Time: 3.2473s
+Total Preprocessing Time (G to G''): 4.9106s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.5
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing pubmed Graph Data ---
+--> [LOG] Loading dataset...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([19717])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 19717 nodes, 88651 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in pubmed_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight pubmed_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening pubmed_input 19717 88651 0.5
+Coarsening Output (stdout):
+
+Threshold: 0.5
+Coarsening Level 0 Number of Vertex = 19717
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                7636           2939
+         1                8359           2940
+         2               11485           2941
+         3                8249           2942
+         4                  -1           2943
+         5               12968           2944
+         6                2216           2945
+         7                2343           2946
+         8                3157           2947
+         9                 221           2948
+Level 0: Max coarse ID = 16315, Min coarse ID = 0, Expected max = 16315
+global_cmap sample (first 10): 2939 2940 2941 2942 2943 2944 2945 2946 2947 2948 
+After Coarsening Number of Vertex = 16316
+Coarsening Level 1 Number of Vertex = 16316
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0               14885           2631
+         1                  -1           2632
+         2               14482           2633
+         3               11946           2634
+         4                  -1           2635
+         5                5825           2636
+         6               15202           2637
+         7                2651           2638
+         8                  -1           2639
+         9                2880           2640
+Level 1: Max coarse ID = 13772, Min coarse ID = 0, Expected max = 13772
+global_cmap sample (first 10): 7758 7759 7760 7761 7762 967 1162 954 1163 1164 
+After Coarsening Number of Vertex = 13773
+Coarsening Level 2 Number of Vertex = 13773
+Merging info saved to ./MergeParts/merge_level_2.txt
+Merging details for first 10 vertices at level 2:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           3929
+         1                7839           3930
+         2                  -1           3931
+         3                3741           3932
+         4               11912           3933
+         5                 440           3934
+         6                9914           3935
+         7                4459           3936
+         8                  -1           3937
+         9                5877           3938
+Level 2: Max coarse ID = 11888, Min coarse ID = 0, Expected max = 11888
+global_cmap sample (first 10): 7139 830 3975 254 831 8020 1623 1532 5874 1624 
+After Coarsening Number of Vertex = 11889
+Coarsening Level 3 Number of Vertex = 11889
+Merging info saved to ./MergeParts/merge_level_3.txt
+Merging details for first 10 vertices at level 3:
+ Vertex ID   Matched Vertex ID     New Label
+         0                2501           4304
+         1                  -1           4305
+         2                1155           4306
+         3                1460           4307
+         4                  -1           4308
+         5                  -1           4309
+         6                1135           4310
+         7                  -1           4311
+         8                5137           4312
+         9                  -1           4313
+Level 3: Max coarse ID = 10501, Min coarse ID = 0, Expected max = 10501
+global_cmap sample (first 10): 7602 7786 7475 9755 7787 5912 9582 9812 10490 3558 
+After Coarsening Number of Vertex = 10502
+Coarsening Level 4 Number of Vertex = 10502
+Merging info saved to ./MergeParts/merge_level_4.txt
+Merging details for first 10 vertices at level 4:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           6103
+         1                 754           6104
+         2                9046           6105
+         3                  -1           6106
+         4                  -1           6107
+         5                  -1           6108
+         6                  -1           6109
+         7                  -1           6110
+         8                  -1           6111
+         9                  -1           6112
+Level 4: Max coarse ID = 9459, Min coarse ID = 0, Expected max = 9459
+global_cmap sample (first 10): 7190 489 8223 400 1593 740 7221 8617 400 4223 
+After Coarsening Number of Vertex = 9460
+Number of coarsening passes: 5
+Size of final xadj: 9461, adjncy: 45234, weight: 45234
+Final: Max coarse ID = 9459, Min coarse ID = 0, Expected max = 9459
+Total mapped vertices: 19717, Expected: 19717
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 9460
+Final Number of Edges = 22617
+INPUT FILE READING TIME: 0.046159 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.000627 seconds
+COARSENING TIME (excluding I/O and transfers): 0.155254 seconds
+Total Pre-computation time: 0.20204 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=9460, num_edges=45234,
+      ndata_schemes={'feat': Scheme(shape=(500,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to pubmed.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.6579 seconds
+Spectral Weighting Time: 0.2071 seconds
+Coarsening Execution Time: 0.4169 seconds
+Total Preprocessing Time: 1.2819 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 19717, Edges: 44325
+Coarsened Graph Nodes: 9460, Edges: 22617
+Data Preparation Time: 0.6579s
+Weighting Execution Time (SPECTRAL): 0.2071s
+Coarsening Execution Time: 0.4169s
+Total Preprocessing Time (G to G''): 1.2819s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.7
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing pubmed Graph Data ---
+--> [LOG] Loading dataset...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([19717])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 19717 nodes, 88651 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in pubmed_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight pubmed_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening pubmed_input 19717 88651 0.7
+Coarsening Output (stdout):
+
+Threshold: 0.7
+Coarsening Level 0 Number of Vertex = 19717
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                7636           1882
+         1                  -1           1883
+         2               11485           1884
+         3                8249           1885
+         4                  -1           1886
+         5               12968           1887
+         6                2216           1888
+         7                2343           1889
+         8                3157           1890
+         9                 221           1891
+Level 0: Max coarse ID = 16319, Min coarse ID = 0, Expected max = 16319
+global_cmap sample (first 10): 1882 1883 1884 1885 1886 1887 1888 1889 1890 1891 
+After Coarsening Number of Vertex = 16320
+Coarsening Level 1 Number of Vertex = 16320
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           2752
+         1                 849           2753
+         2                1291           2754
+         3                  -1           2755
+         4                9319           2756
+         5                  -1           2757
+         6                  -1           2758
+         7               11698           2759
+         8                  -1           2760
+         9                 469           2761
+Level 1: Max coarse ID = 13751, Min coarse ID = 0, Expected max = 13751
+global_cmap sample (first 10): 6053 6054 6055 6056 6057 6058 8785 8786 8787 8788 
+After Coarsening Number of Vertex = 13752
+Number of coarsening passes: 2
+Size of final xadj: 13753, adjncy: 66634, weight: 66634
+Final: Max coarse ID = 13751, Min coarse ID = 0, Expected max = 13751
+Total mapped vertices: 19717, Expected: 19717
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 13752
+Final Number of Edges = 33317
+INPUT FILE READING TIME: 0.042357 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.000378 seconds
+COARSENING TIME (excluding I/O and transfers): 0.062916 seconds
+Total Pre-computation time: 0.105651 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=13752, num_edges=66634,
+      ndata_schemes={'feat': Scheme(shape=(500,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to pubmed.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.7030 seconds
+Spectral Weighting Time: 0.3405 seconds
+Coarsening Execution Time: 0.2850 seconds
+Total Preprocessing Time: 1.3285 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 19717, Edges: 44325
+Coarsened Graph Nodes: 13752, Edges: 33317
+Data Preparation Time: 0.7030s
+Weighting Execution Time (SPECTRAL): 0.3405s
+Coarsening Execution Time: 0.2850s
+Total Preprocessing Time (G to G''): 1.3285s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.85
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing pubmed Graph Data ---
+--> [LOG] Loading dataset...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([19717])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 19717 nodes, 88651 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in pubmed_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight pubmed_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening pubmed_input 19717 88651 0.85
+Coarsening Output (stdout):
+
+Threshold: 0.85
+Coarsening Level 0 Number of Vertex = 19717
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                7636           2211
+         1                  -1           2212
+         2               11485           2213
+         3                8249           2214
+         4                  -1           2215
+         5               12968           2216
+         6                2216           2217
+         7                2343           2218
+         8                3157           2219
+         9                 221           2220
+Level 0: Max coarse ID = 16320, Min coarse ID = 0, Expected max = 16320
+global_cmap sample (first 10): 2211 2212 2213 2214 2215 2216 2217 2218 2219 2220 
+After Coarsening Number of Vertex = 16321
+Number of coarsening passes: 1
+Size of final xadj: 16322, adjncy: 76592, weight: 76592
+Final: Max coarse ID = 16320, Min coarse ID = 0, Expected max = 16320
+Total mapped vertices: 19717, Expected: 19717
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 16321
+Final Number of Edges = 38296
+INPUT FILE READING TIME: 0.041021 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.000347 seconds
+COARSENING TIME (excluding I/O and transfers): 0.041462 seconds
+Total Pre-computation time: 0.08283 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+  NumNodes: 19717
+  NumEdges: 88651
+  NumFeats: 500
+  NumClasses: 3
+  NumTrainingSamples: 60
+  NumValidationSamples: 500
+  NumTestSamples: 1000
+Done loading data from cached files.
+
+Final Coarsened Graph: Graph(num_nodes=16321, num_edges=76592,
+      ndata_schemes={'feat': Scheme(shape=(500,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to pubmed.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.6683 seconds
+Spectral Weighting Time: 0.2224 seconds
+Coarsening Execution Time: 0.2811 seconds
+Total Preprocessing Time: 1.1718 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 19717, Edges: 44325
+Coarsened Graph Nodes: 16321, Edges: 38296
+Data Preparation Time: 0.6683s
+Weighting Execution Time (SPECTRAL): 0.2224s
+Coarsening Execution Time: 0.2811s
+Total Preprocessing Time (G to G''): 1.1718s
+--> Training SAGE on coarsened graph...
+--- pubmed EXPERIMENTS COMPLETE ---
