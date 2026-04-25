@@ -1,0 +1,455 @@
+--- STARTING CLIQUE-BASED COARSENING: ogbn-arxiv ---
+Step 1: Training Baseline on Original Graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.3
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing ogbn-arxiv Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([169343])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 169343 nodes, 2315598 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in arxiv_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight arxiv_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening arxiv_input 169343 2315598 0.3
+Coarsening Output (stdout):
+
+Threshold: 0.3
+Coarsening Level 0 Number of Vertex = 169343
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0               93487            625
+         1              154949            626
+         2                6082            627
+         3                  -1            628
+         4              112028            629
+         5                  -1            630
+         6                1338            631
+         7                  -1            632
+         8               72523            633
+         9                  -1            634
+Level 0: Max coarse ID = 108339, Min coarse ID = 0, Expected max = 108339
+global_cmap sample (first 10): 625 626 627 628 629 630 631 632 633 634 
+After Coarsening Number of Vertex = 108340
+Coarsening Level 1 Number of Vertex = 108340
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0               15835           6086
+         1               89404           6087
+         2               11204           6088
+         3               96261           6089
+         4               79480           6090
+         5               37852           6091
+         6               24200           6092
+         7               59213           6093
+         8               18754           6094
+         9                  -1           6095
+Level 1: Max coarse ID = 73719, Min coarse ID = 0, Expected max = 73719
+global_cmap sample (first 10): 14863 14864 14865 14866 14867 14868 14869 14870 14871 14872 
+After Coarsening Number of Vertex = 73720
+Coarsening Level 2 Number of Vertex = 73720
+Merging info saved to ./MergeParts/merge_level_2.txt
+Merging details for first 10 vertices at level 2:
+ Vertex ID   Matched Vertex ID     New Label
+         0                6559           2559
+         1                  -1           2560
+         2               45973           2561
+         3                  -1           2562
+         4               10100           2563
+         5               49471           2564
+         6               41721           2565
+         7               69671           2566
+         8               34952           2567
+         9                  -1           2568
+Level 2: Max coarse ID = 53037, Min coarse ID = 0, Expected max = 53037
+global_cmap sample (first 10): 9362 9363 9364 9365 9366 9367 2493 9368 3246 9369 
+After Coarsening Number of Vertex = 53038
+Coarsening Level 3 Number of Vertex = 53038
+Merging info saved to ./MergeParts/merge_level_3.txt
+Merging details for first 10 vertices at level 3:
+ Vertex ID   Matched Vertex ID     New Label
+         0               20360           3501
+         1                  -1           3502
+         2                  -1           3503
+         3                  -1           3504
+         4               21306           3505
+         5               17163           3506
+         6                  -1           3507
+         7               18613           3508
+         8                2014           3509
+         9                  -1           3510
+Level 3: Max coarse ID = 40023, Min coarse ID = 0, Expected max = 40023
+global_cmap sample (first 10): 32877 378 379 380 381 382 26901 383 15739 4872 
+After Coarsening Number of Vertex = 40024
+Number of coarsening passes: 4
+Size of final xadj: 40025, adjncy: 930941, weight: 930941
+Final: Max coarse ID = 40023, Min coarse ID = 0, Expected max = 40023
+Total mapped vertices: 169343, Expected: 169343
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 40024
+Final Number of Edges = 465470
+INPUT FILE READING TIME: 0.850876 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.00483 seconds
+COARSENING TIME (excluding I/O and transfers): 15.8998 seconds
+Total Pre-computation time: 16.7555 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=40024, num_edges=930941,
+      ndata_schemes={'feat': Scheme(shape=(128,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to arxiv.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 1.2208 seconds
+Spectral Weighting Time: 1.6998 seconds
+Coarsening Execution Time: 17.2887 seconds
+Total Preprocessing Time: 20.2093 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 169343, Edges: 583121
+Coarsened Graph Nodes: 40024, Edges: 465470
+Data Preparation Time: 1.2208s
+Weighting Execution Time (SPECTRAL): 1.6998s
+Coarsening Execution Time: 17.2887s
+Total Preprocessing Time (G to G''): 20.2093s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.5
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing ogbn-arxiv Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([169343])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 169343 nodes, 2315598 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in arxiv_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight arxiv_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening arxiv_input 169343 2315598 0.5
+Coarsening Output (stdout):
+
+Threshold: 0.5
+Coarsening Level 0 Number of Vertex = 169343
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0               92115           1671
+         1              154949           1672
+         2                6082           1673
+         3              126243           1674
+         4              112028           1675
+         5                  -1           1676
+         6                1338           1677
+         7                  -1           1678
+         8               72523           1679
+         9                  -1           1680
+Level 0: Max coarse ID = 108362, Min coarse ID = 0, Expected max = 108362
+global_cmap sample (first 10): 1671 1672 1673 1674 1675 1676 1677 1678 1679 1680 
+After Coarsening Number of Vertex = 108363
+Coarsening Level 1 Number of Vertex = 108363
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  -1           4597
+         1               23606           4598
+         2               42752           4599
+         3               93139           4600
+         4               52384           4601
+         5                2591           4602
+         6               61366           4603
+         7               50204           4604
+         8               72199           4605
+         9                  -1           4606
+Level 1: Max coarse ID = 73826, Min coarse ID = 0, Expected max = 73826
+global_cmap sample (first 10): 174 175 176 177 178 179 180 181 182 183 
+After Coarsening Number of Vertex = 73827
+Number of coarsening passes: 2
+Size of final xadj: 73828, adjncy: 1363044, weight: 1363044
+Final: Max coarse ID = 73826, Min coarse ID = 0, Expected max = 73826
+Total mapped vertices: 169343, Expected: 169343
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 73827
+Final Number of Edges = 681522
+INPUT FILE READING TIME: 1.02857 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.005914 seconds
+COARSENING TIME (excluding I/O and transfers): 15.3349 seconds
+Total Pre-computation time: 16.3694 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=73827, num_edges=1363044,
+      ndata_schemes={'feat': Scheme(shape=(128,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to arxiv.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.8046 seconds
+Spectral Weighting Time: 1.6312 seconds
+Coarsening Execution Time: 17.0882 seconds
+Total Preprocessing Time: 19.5240 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 169343, Edges: 583121
+Coarsened Graph Nodes: 73827, Edges: 681522
+Data Preparation Time: 0.8046s
+Weighting Execution Time (SPECTRAL): 1.6312s
+Coarsening Execution Time: 17.0882s
+Total Preprocessing Time (G to G''): 19.5240s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.7
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing ogbn-arxiv Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([169343])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 169343 nodes, 2315598 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in arxiv_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight arxiv_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening arxiv_input 169343 2315598 0.7
+Coarsening Output (stdout):
+
+Threshold: 0.7
+Coarsening Level 0 Number of Vertex = 169343
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0               93487           1151
+         1              154949           1152
+         2                6082           1153
+         3                  -1           1154
+         4              112028           1155
+         5                  -1           1156
+         6                1338           1157
+         7                  -1           1158
+         8               72523           1159
+         9                  -1           1160
+Level 0: Max coarse ID = 108264, Min coarse ID = 0, Expected max = 108264
+global_cmap sample (first 10): 1151 1152 1153 1154 1155 1156 1157 1158 1159 1160 
+After Coarsening Number of Vertex = 108265
+Number of coarsening passes: 1
+Size of final xadj: 108266, adjncy: 1707329, weight: 1707329
+Final: Max coarse ID = 108264, Min coarse ID = 0, Expected max = 108264
+Total mapped vertices: 169343, Expected: 169343
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 108265
+Final Number of Edges = 853664
+INPUT FILE READING TIME: 0.922267 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.007829 seconds
+COARSENING TIME (excluding I/O and transfers): 10.0976 seconds
+Total Pre-computation time: 11.0277 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=108265, num_edges=1707329,
+      ndata_schemes={'feat': Scheme(shape=(128,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to arxiv.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.8328 seconds
+Spectral Weighting Time: 2.1124 seconds
+Coarsening Execution Time: 11.8786 seconds
+Total Preprocessing Time: 14.8238 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 169343, Edges: 583121
+Coarsened Graph Nodes: 108265, Edges: 853664
+Data Preparation Time: 0.8328s
+Weighting Execution Time (SPECTRAL): 2.1124s
+Coarsening Execution Time: 11.8786s
+Total Preprocessing Time (G to G''): 14.8238s
+--> Training SAGE on coarsened graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.85
+----------------------------------------------------------
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing ogbn-arxiv Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([169343])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 169343 nodes, 2315598 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in arxiv_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight arxiv_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening arxiv_input 169343 2315598 0.85
+Coarsening Output (stdout):
+
+Threshold: 0.85
+Coarsening Level 0 Number of Vertex = 169343
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0               93487          21535
+         1              154949          21536
+         2                6082          21537
+         3              126243          21538
+         4              112028          21539
+         5                  -1          21540
+         6                1338          21541
+         7                  -1          21542
+         8               72523          21543
+         9                  -1          21544
+Level 0: Max coarse ID = 108262, Min coarse ID = 0, Expected max = 108262
+global_cmap sample (first 10): 21535 21536 21537 21538 21539 21540 21541 21542 21543 21544 
+After Coarsening Number of Vertex = 108263
+Number of coarsening passes: 1
+Size of final xadj: 108264, adjncy: 1708930, weight: 1708930
+Final: Max coarse ID = 108262, Min coarse ID = 0, Expected max = 108262
+Total mapped vertices: 169343, Expected: 169343
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 108263
+Final Number of Edges = 854465
+INPUT FILE READING TIME: 1.25493 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.008906 seconds
+COARSENING TIME (excluding I/O and transfers): 10.8629 seconds
+Total Pre-computation time: 12.1267 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=108263, num_edges=1708930,
+      ndata_schemes={'feat': Scheme(shape=(128,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to arxiv.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 0.9022 seconds
+Spectral Weighting Time: 1.4692 seconds
+Coarsening Execution Time: 13.0172 seconds
+Total Preprocessing Time: 15.3887 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 169343, Edges: 583121
+Coarsened Graph Nodes: 108263, Edges: 854465
+Data Preparation Time: 0.9022s
+Weighting Execution Time (SPECTRAL): 1.4692s
+Coarsening Execution Time: 13.0172s
+Total Preprocessing Time (G to G''): 15.3887s
+--> Training SAGE on coarsened graph...
+--- ogbn-arxiv EXPERIMENTS COMPLETE ---

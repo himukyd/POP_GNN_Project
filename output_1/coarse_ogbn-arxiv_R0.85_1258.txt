@@ -1,0 +1,70 @@
+--> [LOG] Data Root: /data/dgl_lab
+Loading original ogbn-arxiv dataset...
+--> [LOG] Multi-label mode: False
+--> [MODE] COARSENED: Training on arxiv.dgl
+
+Training on Coarsened Graph (ogbn-arxiv)...
+Epoch 000 | Loss 2.5929 | Val Acc: 0.5337
+Epoch 001 | Loss 1.7617 | Val Acc: 0.6053
+Epoch 002 | Loss 1.5265 | Val Acc: 0.6270
+Epoch 003 | Loss 1.4086 | Val Acc: 0.6362
+Epoch 004 | Loss 1.3470 | Val Acc: 0.6446
+Epoch 005 | Loss 1.3069 | Val Acc: 0.6468
+Epoch 006 | Loss 1.2763 | Val Acc: 0.6567
+Epoch 007 | Loss 1.2538 | Val Acc: 0.6542
+Epoch 008 | Loss 1.2364 | Val Acc: 0.6623
+Epoch 009 | Loss 1.2214 | Val Acc: 0.6644
+Epoch 010 | Loss 1.2072 | Val Acc: 0.6660
+Epoch 011 | Loss 1.1999 | Val Acc: 0.6703
+Epoch 012 | Loss 1.1911 | Val Acc: 0.6689
+Epoch 013 | Loss 1.1832 | Val Acc: 0.6703
+Epoch 014 | Loss 1.1771 | Val Acc: 0.6738
+Epoch 015 | Loss 1.1692 | Val Acc: 0.6728
+Epoch 016 | Loss 1.1663 | Val Acc: 0.6748
+Epoch 017 | Loss 1.1628 | Val Acc: 0.6747
+Epoch 018 | Loss 1.1566 | Val Acc: 0.6754
+Epoch 019 | Loss 1.1503 | Val Acc: 0.6763
+Epoch 020 | Loss 1.1512 | Val Acc: 0.6802
+Epoch 021 | Loss 1.1469 | Val Acc: 0.6770
+Epoch 022 | Loss 1.1433 | Val Acc: 0.6780
+Epoch 023 | Loss 1.1409 | Val Acc: 0.6763
+Epoch 024 | Loss 1.1359 | Val Acc: 0.6797
+Epoch 025 | Loss 1.1373 | Val Acc: 0.6779
+Epoch 026 | Loss 1.1347 | Val Acc: 0.6805
+Epoch 027 | Loss 1.1306 | Val Acc: 0.6733
+Epoch 028 | Loss 1.1278 | Val Acc: 0.6745
+Epoch 029 | Loss 1.1242 | Val Acc: 0.6777
+Epoch 030 | Loss 1.1271 | Val Acc: 0.6769
+Epoch 031 | Loss 1.1216 | Val Acc: 0.6792
+Epoch 032 | Loss 1.1212 | Val Acc: 0.6840
+Epoch 033 | Loss 1.1200 | Val Acc: 0.6803
+Epoch 034 | Loss 1.1157 | Val Acc: 0.6760
+Epoch 035 | Loss 1.1193 | Val Acc: 0.6803
+Epoch 036 | Loss 1.1150 | Val Acc: 0.6780
+Epoch 037 | Loss 1.1156 | Val Acc: 0.6767
+Epoch 038 | Loss 1.1146 | Val Acc: 0.6810
+Epoch 039 | Loss 1.1134 | Val Acc: 0.6803
+Epoch 040 | Loss 1.1114 | Val Acc: 0.6789
+Epoch 041 | Loss 1.1127 | Val Acc: 0.6826
+Epoch 042 | Loss 1.1076 | Val Acc: 0.6815
+Epoch 043 | Loss 1.1093 | Val Acc: 0.6848
+Epoch 044 | Loss 1.1112 | Val Acc: 0.6821
+Epoch 045 | Loss 1.1063 | Val Acc: 0.6851
+Epoch 046 | Loss 1.1035 | Val Acc: 0.6860
+Epoch 047 | Loss 1.1032 | Val Acc: 0.6821
+Epoch 048 | Loss 1.1046 | Val Acc: 0.6830
+Epoch 049 | Loss 1.1047 | Val Acc: 0.6841
+
+Testing on Original Graph via direct layer-wise inference...
+
+--- RESULTS SUMMARY ---
+Original Graph (G):   Nodes: 169343     Edges: 583121
+Training Graph (G_t): Nodes: 108263     Edges: 854465
+Reduction Ratio:      36.07%
+------------------------------
+BEST_VAL_ACC (on G_t): 0.6860
+FINAL_TEST_ACC (on G): 0.5135
+TRAIN_TIME: 30.2384s
+TEST_TIME: 0.5644s
+------------------------------
+Workflow: Trained on reduced G_t, Tested on Original G (Correct).
