@@ -1,0 +1,358 @@
+--- STARTING CLIQUE-BASED COARSENING COMPARISON ---
+Step 1: Training Baseline on Original Graph...
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.3
+----------------------------------------------------------
+--> Coarsening graph (Clique-Based) with ratio 0.3...
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing reddit Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([232965])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 232965 nodes, 114615892 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in reddit_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight reddit_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening reddit_input 232965 114615892 0.3
+Error running Coarsening program: Command '['./him_coarsening', 'reddit_input', '232965', '114615892', '0.3']' returned non-zero exit status 1.
+Error reading file reddit_input/input_coarsening_weights.txt at element 86931490
+
+--> Error: Could not generate reddit.dgl for ratio 0.3. Skipping.
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.5
+----------------------------------------------------------
+--> Coarsening graph (Clique-Based) with ratio 0.5...
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing reddit Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([232965])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 232965 nodes, 114615892 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in reddit_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight reddit_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening reddit_input 232965 114615892 0.5
+Coarsening Output (stdout):
+
+Threshold: 0.5
+Coarsening Level 0 Number of Vertex = 232965
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  15           3957
+         1                 151           3958
+         2                 357           3959
+         3                  -1           3960
+         4                 479           3961
+         5                  39           3962
+         6                 695           3963
+         7                 868           3964
+         8                 977           3965
+         9                  -1           3966
+Level 0: Max coarse ID = 120711, Min coarse ID = 0, Expected max = 120711
+global_cmap sample (first 10): 3957 3958 3959 3960 3961 3962 3963 3964 3965 3966 
+After Coarsening Number of Vertex = 120712
+Coarsening Level 1 Number of Vertex = 120712
+Merging info saved to ./MergeParts/merge_level_1.txt
+Merging details for first 10 vertices at level 1:
+ Vertex ID   Matched Vertex ID     New Label
+         0                 767           6207
+         1                4588           6208
+         2                9565           6209
+         3               11195           6210
+         4               81113           6211
+         5               10650           6212
+         6               19934           6213
+         7               27896           6214
+         8                9757           6215
+         9                5443           6216
+Level 1: Max coarse ID = 62816, Min coarse ID = 0, Expected max = 62816
+global_cmap sample (first 10): 31824 31825 31826 31827 31828 31829 31830 31831 31832 31833 
+After Coarsening Number of Vertex = 62817
+Number of coarsening passes: 2
+Size of final xadj: 62818, adjncy: 42819095, weight: 42819095
+Final: Max coarse ID = 62816, Min coarse ID = 0, Expected max = 62816
+Total mapped vertices: 232965, Expected: 232965
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 62817
+Final Number of Edges = 21409547
+INPUT FILE READING TIME: 32.9371 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.156642 seconds
+COARSENING TIME (excluding I/O and transfers): 28.0196 seconds
+Total Pre-computation time: 61.1134 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=62817, num_edges=42819095,
+      ndata_schemes={'feat': Scheme(shape=(602,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to reddit.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 64.3773 seconds
+Spectral Weighting Time: 119.4563 seconds
+Coarsening Execution Time: 60.7692 seconds
+Total Preprocessing Time: 244.6028 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 232965, Edges: 57307946
+Coarsened Graph Nodes: 62817, Edges: 21409547
+Data Preparation Time: 64.3773s
+Weighting Execution Time (SPECTRAL): 119.4563s
+Coarsening Execution Time: 60.7692s
+Total Preprocessing Time (G to G''): 244.6028s
+--> Training SAGE on coarsened graph...
+--> Done. Results in ./output/coarse_reddit_R0.5_1257.txt
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.7
+----------------------------------------------------------
+--> Coarsening graph (Clique-Based) with ratio 0.7...
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing reddit Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([232965])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 232965 nodes, 114615892 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in reddit_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight reddit_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening reddit_input 232965 114615892 0.7
+Coarsening Output (stdout):
+
+Threshold: 0.7
+Coarsening Level 0 Number of Vertex = 232965
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  15           4588
+         1                 151           4589
+         2                 357           4590
+         3                  -1           4591
+         4                 479           4592
+         5                  39           4593
+         6                 695           4594
+         7                 868           4595
+         8                 977           4596
+         9                  -1           4597
+Level 0: Max coarse ID = 120730, Min coarse ID = 0, Expected max = 120730
+global_cmap sample (first 10): 4588 4589 4590 4591 4592 4593 4594 4595 4596 4597 
+After Coarsening Number of Vertex = 120731
+Number of coarsening passes: 1
+Size of final xadj: 120732, adjncy: 61880999, weight: 61880999
+Final: Max coarse ID = 120730, Min coarse ID = 0, Expected max = 120730
+Total mapped vertices: 232965, Expected: 232965
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 120731
+Final Number of Edges = 30940499
+INPUT FILE READING TIME: 38.5689 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.227948 seconds
+COARSENING TIME (excluding I/O and transfers): 23.7853 seconds
+Total Pre-computation time: 62.5821 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=120731, num_edges=61880999,
+      ndata_schemes={'feat': Scheme(shape=(602,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to reddit.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 64.7184 seconds
+Spectral Weighting Time: 119.0409 seconds
+Coarsening Execution Time: 63.5544 seconds
+Total Preprocessing Time: 247.3137 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 232965, Edges: 57307946
+Coarsened Graph Nodes: 120731, Edges: 30940499
+Data Preparation Time: 64.7184s
+Weighting Execution Time (SPECTRAL): 119.0409s
+Coarsening Execution Time: 63.5544s
+Total Preprocessing Time (G to G''): 247.3137s
+--> Training SAGE on coarsened graph...
+--> Done. Results in ./output/coarse_reddit_R0.7_1257.txt
+----------------------------------------------------------
+PROCESSING RETAIN_FRACTION=0.85
+----------------------------------------------------------
+--> Coarsening graph (Clique-Based) with ratio 0.85...
+
+--- Compiling CUDA Kernels ---
+--> [SUCCESS] nvcc found.
+--> Compiling 'him_spectralweight.cu' into 'him_spectralweight'...
+--> [SUCCESS] Compiled 'him_spectralweight'.
+--> Compiling 'him_coarsening.cu' into 'him_coarsening'...
+--> [SUCCESS] Compiled 'him_coarsening'.
+
+--- Setting up CUDA Output Directories ---
+--> Ensured directory 'SpectralOutput' exists.
+--> Ensured directory 'CoarsedGraphOutput' exists.
+--> Ensured directory 'MergeParts' exists.
+--- 1. Preparing reddit Graph Data ---
+--> [LOG] Loading dataset...
+--> [LOG] ...Dataset loaded.
+--> [LOG] Using single-label mode. Label shape: torch.Size([232965])
+--> [LOG] Cleaning graph (to_simple, to_bidirected)...
+--> [LOG] to_simple Done 
+--> [LOG] to_bidirected Done 
+--> [LOG] ...Graph cleaning done.
+--> [LOG] Converting graph to CSR format...
+--> [LOG] ...CSR conversion done.
+Graph Size: 232965 nodes, 114615892 edges (for CSR input).
+
+--- 2. Generating Initial Input Files in reddit_input ---
+Initial input files (row.txt, column.txt, weight.txt [float]) generated.
+
+--- 3A. Running SPECTRAL-based Weight Computation ---
+--> Executing: ./him_spectralweight reddit_input
+--> [SUCCESS] Finished running './him_spectralweight'.
+--> [SUCCESS] Node importance scores saved to node_importance_scores.txt
+--> [SUCCESS] Final weights (Range: [1, 1000000]) saved to input_coarsening_weights.txt
+--> [SUCCESS] Coarsening input weights are ready.
+
+--- 3B. Running Graph Coarsening ---
+Executing: ./him_coarsening reddit_input 232965 114615892 0.85
+Coarsening Output (stdout):
+
+Threshold: 0.85
+Coarsening Level 0 Number of Vertex = 232965
+Merging info saved to ./MergeParts/merge_level_0.txt
+Merging details for first 10 vertices at level 0:
+ Vertex ID   Matched Vertex ID     New Label
+         0                  15           4848
+         1                 151           4849
+         2                 357           4850
+         3                  -1           4851
+         4                 479           4852
+         5                  39           4853
+         6                 695           4854
+         7                 868           4855
+         8                 977           4856
+         9                  -1           4857
+Level 0: Max coarse ID = 120636, Min coarse ID = 0, Expected max = 120636
+global_cmap sample (first 10): 4848 4849 4850 4851 4852 4853 4854 4855 4856 4857 
+After Coarsening Number of Vertex = 120637
+Number of coarsening passes: 1
+Size of final xadj: 120638, adjncy: 61817577, weight: 61817577
+Final: Max coarse ID = 120636, Min coarse ID = 0, Expected max = 120636
+Total mapped vertices: 232965, Expected: 232965
+Final vertex mapping saved to final_vertex_mapping.txt
+Final coarsened graph saved to coarse_row.txt, coarse_column.txt, and coarse_weight.txt
+Final Number of Vertices = 120637
+Final Number of Edges = 30908788
+INPUT FILE READING TIME: 33.1028 seconds
+I/O TRANSFER TIME (CPU-GPU & GPU-CPU): 0.221707 seconds
+COARSENING TIME (excluding I/O and transfers): 25.4404 seconds
+Total Pre-computation time: 58.7649 seconds
+
+Coarsening complete. Output files expected in CoarsedGraphOutput/
+
+--- 4. Reading Coarsened Output and Aggregating Features ---
+--> [LOG] Re-loading dataset for mask aggregation...
+
+Final Coarsened Graph: Graph(num_nodes=120637, num_edges=61817577,
+      ndata_schemes={'feat': Scheme(shape=(602,), dtype=torch.float32), 'label': Scheme(shape=(), dtype=torch.int64), 'train_mask': Scheme(shape=(), dtype=torch.bool), 'val_mask': Scheme(shape=(), dtype=torch.bool), 'test_mask': Scheme(shape=(), dtype=torch.bool), 'score': Scheme(shape=(), dtype=torch.float32)}
+      edata_schemes={'weight': Scheme(shape=(), dtype=torch.float32)})
+Final coarsened graph saved to reddit.dgl.
+
+--- COARSENING TIMING SUMMARY ---
+Data Prep Time: 64.3393 seconds
+Spectral Weighting Time: 118.5305 seconds
+Coarsening Execution Time: 61.3132 seconds
+Total Preprocessing Time: 244.1830 seconds
+
+--- FINAL SUMMARY ---
+Original Graph Nodes: 232965, Edges: 57307946
+Coarsened Graph Nodes: 120637, Edges: 30908788
+Data Preparation Time: 64.3393s
+Weighting Execution Time (SPECTRAL): 118.5305s
+Coarsening Execution Time: 61.3132s
+Total Preprocessing Time (G to G''): 244.1830s
+--> Training SAGE on coarsened graph...
+--> Done. Results in ./output/coarse_reddit_R0.85_1257.txt
+--- ALL COARSENING EXPERIMENTS COMPLETE ---
