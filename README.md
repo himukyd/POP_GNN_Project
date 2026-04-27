@@ -144,3 +144,10 @@ This makes downstream comparison easy by parsing lines:
 ## License
 
 See `LICENSE`.
+
+## Contributors
+
+- HIAMNSHU
+- Yash Raj Verma
+- Pankaj Kashyap
+- KUSHAL khachale
