@@ -1,0 +1,27 @@
+Dataset = , batch_size = 4096
+Layer_1 6075 | Layer_2 9735 | Layer_3 11756
+Epoch 00000 | Loss 2.7347 | Accuracy 0.8363 | Time : 3.2606 | loop 2.1248 | Model 1.1357 | x_y_time 0.0030 | pred 0.5035 | loss_time 0.0036
+Epoch 00001 | Loss 0.8731 | Accuracy 0.9032 | Time : 2.1282 | loop 1.1159 | Model 1.0121 | x_y_time 0.0016 | pred 0.4538 | loss_time 0.0034
+Epoch 00002 | Loss 0.6048 | Accuracy 0.9181 | Time : 2.0065 | loop 1.0917 | Model 0.9147 | x_y_time 0.0016 | pred 0.4519 | loss_time 0.0026
+Epoch 00003 | Loss 0.4999 | Accuracy 0.9248 | Time : 1.9338 | loop 1.0787 | Model 0.8550 | x_y_time 0.0016 | pred 0.4454 | loss_time 0.0026
+Epoch 00004 | Loss 0.4418 | Accuracy 0.9300 | Time : 3.2871 | loop 2.4295 | Model 0.8575 | x_y_time 0.0016 | pred 0.4462 | loss_time 0.0027
+Epoch 00005 | Loss 0.4042 | Accuracy 0.9314 | Time : 2.1009 | loop 1.1018 | Model 0.9989 | x_y_time 0.0016 | pred 0.4478 | loss_time 0.0058
+Epoch 00006 | Loss 0.3731 | Accuracy 0.9345 | Time : 2.1728 | loop 1.1229 | Model 1.0497 | x_y_time 0.0017 | pred 0.4563 | loss_time 0.0035
+Epoch 00007 | Loss 0.3489 | Accuracy 0.9365 | Time : 2.6521 | loop 1.3012 | Model 1.3507 | x_y_time 0.0022 | pred 0.5830 | loss_time 0.0080
+Epoch 00008 | Loss 0.3289 | Accuracy 0.9388 | Time : 2.6172 | loop 1.2876 | Model 1.3294 | x_y_time 0.0022 | pred 0.5755 | loss_time 0.0058
+Epoch 00009 | Loss 0.3135 | Accuracy 0.9397 | Time : 2.3579 | loop 1.2072 | Model 1.1505 | x_y_time 0.0020 | pred 0.5211 | loss_time 0.0036
+Epoch 00010 | Loss 0.2992 | Accuracy 0.9425 | Time : 2.4993 | loop 1.2867 | Model 1.2124 | x_y_time 0.0022 | pred 0.5925 | loss_time 0.0048
+Epoch 00011 | Loss 0.2869 | Accuracy 0.9431 | Time : 2.0153 | loop 1.1210 | Model 0.8941 | x_y_time 0.0016 | pred 0.4631 | loss_time 0.0027
+Epoch 00012 | Loss 0.2761 | Accuracy 0.9427 | Time : 2.0073 | loop 1.1236 | Model 0.8836 | x_y_time 0.0016 | pred 0.4576 | loss_time 0.0049
+Epoch 00013 | Loss 0.2675 | Accuracy 0.9434 | Time : 2.2679 | loop 1.2072 | Model 1.0606 | x_y_time 0.0019 | pred 0.5130 | loss_time 0.0028
+Epoch 00014 | Loss 0.2610 | Accuracy 0.9441 | Time : 2.0047 | loop 1.1231 | Model 0.8815 | x_y_time 0.0016 | pred 0.4553 | loss_time 0.0028
+Epoch 00015 | Loss 0.2559 | Accuracy 0.9451 | Time : 2.0199 | loop 1.1372 | Model 0.8825 | x_y_time 0.0016 | pred 0.4560 | loss_time 0.0028
+Epoch 00016 | Loss 0.2493 | Accuracy 0.9459 | Time : 2.2790 | loop 1.1919 | Model 1.0869 | x_y_time 0.0018 | pred 0.4814 | loss_time 0.0056
+Epoch 00017 | Loss 0.2440 | Accuracy 0.9441 | Time : 3.5299 | loop 2.5099 | Model 1.0198 | x_y_time 0.0017 | pred 0.4810 | loss_time 0.0028
+Epoch 00018 | Loss 0.2415 | Accuracy 0.9458 | Time : 2.0250 | loop 1.1392 | Model 0.8857 | x_y_time 0.0016 | pred 0.4566 | loss_time 0.0028
+Epoch 00019 | Loss 0.2352 | Accuracy 0.9446 | Time : 2.0247 | loop 1.1381 | Model 0.8864 | x_y_time 0.0016 | pred 0.4565 | loss_time 0.0028
+total for loop time, total model time, total loss time, total_training_time
+26.8391, 20.3478, 0.0763, 47.1900
+Test Accuracy 0.9277
+last_spmm_time, last_cuda_sampling_time
+, 
